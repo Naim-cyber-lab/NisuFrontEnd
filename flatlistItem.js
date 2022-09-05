@@ -10,7 +10,6 @@ import styles from "./styles";
 import { TouchableHighlight, TouchableOpacity } from "@gorhom/bottom-sheet";
 
 import DoubleClick from "double-click-react-native";
-import Navigation from "../../../navigation";
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -41,13 +40,7 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 
 const flatlistItem = forwardRef(({ipAdress,event, parentRefIndex,playVideo,titre, audio ,navigation , index , item , swiperRef, lengthFilesEvent, filesEvent,numberFiles, containVideo}, parentRefEvent) => {
-
-
-
-    //******************************************************************************************** */
-
     //********************************* POUR LES SWIPES***************************************** */
-
 
     //************************************* POUR LA VIDEO ****************************************************/
 
@@ -65,21 +58,11 @@ const flatlistItem = forwardRef(({ipAdress,event, parentRefIndex,playVideo,titre
 
     const [shouldPlay , setShouldPlay] = useState(false)
 
-    
-
-    useImperativeHandle(parentRefIndex , () => ({
-        play,
-        unload,
-        stop,
-    }))
-
-
     useImperativeHandle(parentRefEvent , () => ({
         playFromEvent,
         unload,
         stopFromEvent,
     }))
-
 
     useEffect(() =>{
         return () => {
@@ -93,7 +76,6 @@ const flatlistItem = forwardRef(({ipAdress,event, parentRefIndex,playVideo,titre
        
     }
 
-
     const playFromEvent = () => {
         
        
@@ -103,7 +85,6 @@ const flatlistItem = forwardRef(({ipAdress,event, parentRefIndex,playVideo,titre
             console.log(titre,"contient plusieurs files")
         }
     }
-
 
     const play = async () => {  
 
@@ -250,19 +231,15 @@ const flatlistItem = forwardRef(({ipAdress,event, parentRefIndex,playVideo,titre
         directionalOffsetThreshold: 20
       };
     
-
-    
-      const onSwipeLeft = (gestureState) => {
+    const onSwipeLeft = (gestureState) => {
         handleFirstClick(-1)
         console.log("swipe left from flatList")
       }
     
-      const onSwipeRight = (gestureState) => {
+    const onSwipeRight = (gestureState) => {
         handleFirstClick(1)
         console.log("swipe right from flatList")
       }
-
-
 
     // ************************************ POUR L'AUDIO ************************************************
 
@@ -306,7 +283,7 @@ async function playSound() {
 
     return(
       <>
-     <Pressable style={{width:widthScreen,position:"absolute"}} >
+     <Pressable style={{width:widthScreen,position:"absolute",flex:1}} >
                <GestureRecognizer
        
                     // onSwipeLeft={(state) => onSwipeLeft(state)}
@@ -317,7 +294,8 @@ async function playSound() {
                         <View>
                             <Image
                                 resizeMode={'contain'}
-                                style={{height: heightScreen - 50,width:widthScreen}}
+                                style={{height:250,width:widthScreen}}
+                                //style={{height: heightScreen - 50,width:widthScreen}}
                                 source={{uri: item[0] == 'h' ? item : ipAdress + item}}
                                 onError ={(error)  => console.warn(error)}
                             />                            
